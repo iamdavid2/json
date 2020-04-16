@@ -1,0 +1,467 @@
+openapi: 3.0.0
+info:
+  title: Simple Inventory API
+  description: This is a simple API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/iamdavid2/testdavid/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: developers
+  description: Operations available to regular developers
+paths:
+  /grbk:
+    post:
+      operationId: grbkPOST
+      requestBody:
+        description: Optional description in *Markdown*
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body'
+        required: true
+      responses:
+        "201":
+          description: Created
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grbk'
+        "400":
+          description: bad input parameter
+      x-swagger-router-controller: Default
+components:
+  schemas:
+    Pet:
+      required:
+      - pet_type
+      type: object
+      properties:
+        pet_type:
+          type: string
+      discriminator:
+        propertyName: pet_type
+    Dog:
+      allOf:
+      - $ref: '#/components/schemas/Pet'
+      - type: object
+        properties:
+          bark:
+            type: boolean
+          breed:
+            type: string
+            enum:
+            - Dingo
+            - Husky
+            - Retriever
+            - Shepherd
+    grbk:
+      type: object
+      properties:
+        took:
+          type: integer
+          format: int32
+          example: 2
+        timed_out:
+          type: boolean
+        _shards:
+          $ref: '#/components/schemas/grbk__shards'
+        hits:
+          $ref: '#/components/schemas/grbk_hits'
+      example:
+        _shards:
+          total: 2
+          failed: 0
+          successful: 2
+          skipped: 0
+        hits:
+          hits:
+          - _index: gradebook_outcomes
+            _type: _doc
+            _source:
+              metadata:
+                timestamplong: 1576685937948
+                ISOtimestamptext: 2019-12-18T16:18:57.948453
+              event:
+                lessonStatus: Started
+                role: Student
+                loggedAccountId: 3309740
+                gradeItemPercentage: 0.3333333333333333
+                homeroomId: 1176590
+                submittedTime: 1576688548000
+                courseCode: CALMS2629
+                gradeItemStatus: gradeItemStatus
+                classroomId: 1237483
+                lessonId: 256390
+                currentAttempt: 2
+                maxScore: 9
+                studentIdentityId: 3309740
+                sensorId: pp.gradebook.outcome
+                gradeItemId: 213574
+                score: 3
+                maxAttempts: 3
+                lastUpdated: 1576688548000
+                scopeAndSequenceId: 1002629
+                unitId: 256377
+                scopeAndSequenceVersion: -1
+                status: A
+            _id: -QrIGW8Bxe5M82Fp5KGq
+            _score: 2
+          - _index: gradebook_outcomes
+            _type: _doc
+            _source:
+              metadata:
+                timestamplong: 1576685937948
+                ISOtimestamptext: 2019-12-18T16:18:57.948453
+              event:
+                lessonStatus: Started
+                role: Student
+                loggedAccountId: 3309740
+                gradeItemPercentage: 0.3333333333333333
+                homeroomId: 1176590
+                submittedTime: 1576688548000
+                courseCode: CALMS2629
+                gradeItemStatus: gradeItemStatus
+                classroomId: 1237483
+                lessonId: 256390
+                currentAttempt: 2
+                maxScore: 9
+                studentIdentityId: 3309740
+                sensorId: pp.gradebook.outcome
+                gradeItemId: 213574
+                score: 3
+                maxAttempts: 3
+                lastUpdated: 1576688548000
+                scopeAndSequenceId: 1002629
+                unitId: 256377
+                scopeAndSequenceVersion: -1
+                status: A
+            _id: -QrIGW8Bxe5M82Fp5KGq
+            _score: 2
+          total: 1
+          max_score: 2
+        took: 2
+        timed_out: true
+    body:
+      required:
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+    grbk__shards:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+          example: 2
+        successful:
+          type: integer
+          format: int32
+          example: 2
+        skipped:
+          type: integer
+          format: int32
+          example: 0
+        failed:
+          type: integer
+          format: int32
+          example: 0
+      example:
+        total: 2
+        failed: 0
+        successful: 2
+        skipped: 0
+    grbk_hits__source_event:
+      type: object
+      properties:
+        scopeAndSequenceId:
+          type: integer
+          format: int32
+          example: 1002629
+        homeroomId:
+          type: integer
+          format: int32
+          example: 1176590
+        classroomId:
+          type: integer
+          format: int32
+          example: 1237483
+        courseCode:
+          type: string
+          example: CALMS2629
+        scopeAndSequenceVersion:
+          type: integer
+          format: int32
+          example: -1
+        studentIdentityId:
+          type: integer
+          format: int32
+          example: 3309740
+        unitId:
+          type: integer
+          format: int32
+          example: 256377
+        lessonId:
+          type: integer
+          format: int32
+          example: 256390
+        gradeItemId:
+          type: integer
+          format: int32
+          example: 213574
+        score:
+          type: integer
+          format: int32
+          example: 3
+        maxScore:
+          type: integer
+          format: int32
+          example: 9
+        role:
+          type: string
+          example: Student
+        loggedAccountId:
+          type: integer
+          format: int32
+          example: 3309740
+        currentAttempt:
+          type: integer
+          format: int32
+          example: 2
+        maxAttempts:
+          type: integer
+          format: int32
+          example: 3
+        submittedTime:
+          type: integer
+          format: int64
+          example: 1576688548000
+        lessonStatus:
+          type: string
+          example: Started
+        lastUpdated:
+          type: integer
+          format: int64
+          example: 1576688548000
+        gradeItemPercentage:
+          type: number
+          example: 0.3333333333333333
+        gradeItemStatus:
+          type: string
+          format: nullable
+        status:
+          type: string
+          example: A
+        sensorId:
+          type: string
+          example: pp.gradebook.outcome
+      example:
+        lessonStatus: Started
+        role: Student
+        loggedAccountId: 3309740
+        gradeItemPercentage: 0.3333333333333333
+        homeroomId: 1176590
+        submittedTime: 1576688548000
+        courseCode: CALMS2629
+        gradeItemStatus: gradeItemStatus
+        classroomId: 1237483
+        lessonId: 256390
+        currentAttempt: 2
+        maxScore: 9
+        studentIdentityId: 3309740
+        sensorId: pp.gradebook.outcome
+        gradeItemId: 213574
+        score: 3
+        maxAttempts: 3
+        lastUpdated: 1576688548000
+        scopeAndSequenceId: 1002629
+        unitId: 256377
+        scopeAndSequenceVersion: -1
+        status: A
+    grbk_hits__source_metadata:
+      type: object
+      properties:
+        timestamplong:
+          type: integer
+          format: int64
+          example: 1576685937948
+        ISOtimestamptext:
+          type: string
+          example: 2019-12-18T16:18:57.948453
+      example:
+        timestamplong: 1576685937948
+        ISOtimestamptext: 2019-12-18T16:18:57.948453
+    grbk_hits__source:
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/grbk_hits__source_event'
+        metadata:
+          $ref: '#/components/schemas/grbk_hits__source_metadata'
+      example:
+        metadata:
+          timestamplong: 1576685937948
+          ISOtimestamptext: 2019-12-18T16:18:57.948453
+        event:
+          lessonStatus: Started
+          role: Student
+          loggedAccountId: 3309740
+          gradeItemPercentage: 0.3333333333333333
+          homeroomId: 1176590
+          submittedTime: 1576688548000
+          courseCode: CALMS2629
+          gradeItemStatus: gradeItemStatus
+          classroomId: 1237483
+          lessonId: 256390
+          currentAttempt: 2
+          maxScore: 9
+          studentIdentityId: 3309740
+          sensorId: pp.gradebook.outcome
+          gradeItemId: 213574
+          score: 3
+          maxAttempts: 3
+          lastUpdated: 1576688548000
+          scopeAndSequenceId: 1002629
+          unitId: 256377
+          scopeAndSequenceVersion: -1
+          status: A
+    grbk_hits_hits:
+      type: object
+      properties:
+        _index:
+          type: string
+          example: gradebook_outcomes
+        _type:
+          type: string
+          example: _doc
+        _id:
+          type: string
+          example: -QrIGW8Bxe5M82Fp5KGq
+        _score:
+          type: integer
+          format: int32
+          example: 2
+        _source:
+          $ref: '#/components/schemas/grbk_hits__source'
+      example:
+        _index: gradebook_outcomes
+        _type: _doc
+        _source:
+          metadata:
+            timestamplong: 1576685937948
+            ISOtimestamptext: 2019-12-18T16:18:57.948453
+          event:
+            lessonStatus: Started
+            role: Student
+            loggedAccountId: 3309740
+            gradeItemPercentage: 0.3333333333333333
+            homeroomId: 1176590
+            submittedTime: 1576688548000
+            courseCode: CALMS2629
+            gradeItemStatus: gradeItemStatus
+            classroomId: 1237483
+            lessonId: 256390
+            currentAttempt: 2
+            maxScore: 9
+            studentIdentityId: 3309740
+            sensorId: pp.gradebook.outcome
+            gradeItemId: 213574
+            score: 3
+            maxAttempts: 3
+            lastUpdated: 1576688548000
+            scopeAndSequenceId: 1002629
+            unitId: 256377
+            scopeAndSequenceVersion: -1
+            status: A
+        _id: -QrIGW8Bxe5M82Fp5KGq
+        _score: 2
+    grbk_hits:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+          example: 1
+        max_score:
+          type: integer
+          format: int32
+          example: 2
+        hits:
+          type: array
+          items:
+            $ref: '#/components/schemas/grbk_hits_hits'
+      example:
+        hits:
+        - _index: gradebook_outcomes
+          _type: _doc
+          _source:
+            metadata:
+              timestamplong: 1576685937948
+              ISOtimestamptext: 2019-12-18T16:18:57.948453
+            event:
+              lessonStatus: Started
+              role: Student
+              loggedAccountId: 3309740
+              gradeItemPercentage: 0.3333333333333333
+              homeroomId: 1176590
+              submittedTime: 1576688548000
+              courseCode: CALMS2629
+              gradeItemStatus: gradeItemStatus
+              classroomId: 1237483
+              lessonId: 256390
+              currentAttempt: 2
+              maxScore: 9
+              studentIdentityId: 3309740
+              sensorId: pp.gradebook.outcome
+              gradeItemId: 213574
+              score: 3
+              maxAttempts: 3
+              lastUpdated: 1576688548000
+              scopeAndSequenceId: 1002629
+              unitId: 256377
+              scopeAndSequenceVersion: -1
+              status: A
+          _id: -QrIGW8Bxe5M82Fp5KGq
+          _score: 2
+        - _index: gradebook_outcomes
+          _type: _doc
+          _source:
+            metadata:
+              timestamplong: 1576685937948
+              ISOtimestamptext: 2019-12-18T16:18:57.948453
+            event:
+              lessonStatus: Started
+              role: Student
+              loggedAccountId: 3309740
+              gradeItemPercentage: 0.3333333333333333
+              homeroomId: 1176590
+              submittedTime: 1576688548000
+              courseCode: CALMS2629
+              gradeItemStatus: gradeItemStatus
+              classroomId: 1237483
+              lessonId: 256390
+              currentAttempt: 2
+              maxScore: 9
+              studentIdentityId: 3309740
+              sensorId: pp.gradebook.outcome
+              gradeItemId: 213574
+              score: 3
+              maxAttempts: 3
+              lastUpdated: 1576688548000
+              scopeAndSequenceId: 1002629
+              unitId: 256377
+              scopeAndSequenceVersion: -1
+              status: A
+          _id: -QrIGW8Bxe5M82Fp5KGq
+          _score: 2
+        total: 1
+        max_score: 2
